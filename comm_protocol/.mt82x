@@ -1,0 +1,5 @@
+# socket config
+export HOST=""
+export PORT=6000
+export BUFF_SIZE=128
+export DESC="MT821/825"

@@ -1,0 +1,40 @@
+
+#map {
+  width: 100%;
+  height: 100%;
+  background: white;
+}
+
+#panel {
+  width: 100%;
+  height: 400px;
+}
+
+.H_ib_body {
+  width: 136px !important;
+}
+
+.H_ib_close {
+  right: 6px;
+  top: 6px;
+  width: 6px;
+  height: 6px;
+}
+
+.H_ib_content {
+  font-size: 11px !important;
+  margin: 8px 10px 8px 8px;
+}
+
+/* in touch screen devices the close icon is difficult to tap 
+   so we make it bigger */
+@media only screen and (hover: none) {
+  .H_ib_body {
+    width: 146px !important;
+  }
+
+  .H_ib_close {
+    width: 8px;
+    height: 8px;
+  }
+}

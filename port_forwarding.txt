@@ -1,0 +1,4 @@
+PORT        IP VERSION      PROTOCOL        SOURCE      	DESCRIPTION
+5000        IPv4            TCP             0.0.0.0/0   	Flask Instance
+6000        IPv4            UDP             0.0.0.0/0   	Micktrack MT821/825 UDP Communication Protocol
+5432        IPv4            TCP             0.0.0.0/0   	PostgreSQL default port (Optional)

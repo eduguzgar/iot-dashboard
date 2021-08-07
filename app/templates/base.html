@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Dashboard IoT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="author" content="">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+  <!-- JQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <!-- JQuery UI -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='modules/jquery-ui-1.12.1.custom/jquery-ui.min.css') }}">
+  <script src="{{ url_for('static', filename='modules/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Chart.js + Moment.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone-with-data.min.js" integrity="sha512-rjmacQUGnwQ4OAAt3MoAmWDQIuswESNZwYcKC8nmdCIxAVkRC/Lk2ta2CWGgCZyS+FfBWPgaO01LvgwU/BX50Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
+  <!-- Here Maps -->
+  <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('dashboard.static', filename='map.css') }}" />
+  <script type="text/javascript" src="{{ url_for('static', filename='modules/here-maps/test-credentials.js') }}"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+
+  <!-- Utils -->
+  <script src="{{ url_for('static', filename='math.js') }}"></script>
+  <script src="{{ url_for('static', filename='utils.js') }}"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('dashboard.static', filename='styles.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}" />
+
+</head>
+
+<body>
+  <div class="grid-container">
+    <header class="header">
+    {% block header %}
+      <div class="header_topbar">
+        <div class="header_aside-open-icon">
+          <i class="fas fa-bars"></i>
+        </div>
+        <div class="header_logo">
+          <h3>Dashboard IoT</h3>
+        </div>
+        <div class="header-user-bar">
+          <i class="fas fa-user" style="font-size: 18px"></i>&nbsp;<i class="fas fa-chevron-down" style="font-size: 12px"></i>&nbsp;edguzgar
+        </div>
+      </div>
+      <div class="header_breadcrumb">
+        <div class="header_breadcrumb-bar-container">
+          <div class="header_breadcrumb-browser">Browser</div>
+          <div class="header_breadcrumb-nav">
+            <ul class="header_breadcrumb-nav-list">
+              <li class="header_breadcrumb-nav-list-item active"><a href="#dashboard">Dashboard</a></li>
+              <li class="header_breadcrumb-nav-list-item"><a href="#iot-devices">Devices</a></li>
+              <li class="header_breadcrumb-nav-list-item"><a href="#gps-trackers">GPS Trackers</a></li>
+              <li class="header_breadcrumb-nav-list-item"><a href="#trucks">Trucks</a></li>
+            </ul>
+          </div>
+        </div>
+        {% block header_breadcrumb_date %}{% endblock %}
+      </div>
+    {% endblock %}
+    </header>
+    <aside class="aside">
+    {% block aside %}
+      <div class="aside_close-icon">
+        <i class="fas fa-times"></i>
+      </div>
+      <ul class="aside_list">
+        <li class="aside_list-item"><a href="javascript:void(0)"><i class="fas fa-fw fa-search"></i>&nbsp;&nbsp;&nbsp;&nbsp;Search truck</a></li>
+        <li class="aside_list-item"><a href="{{url_for('map-routes.map_routes')}}"><i class="fas fa-fw fa-map-marked-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;Map routes</a></li>
+        <li class="aside_list-item"><a href="{{url_for('statistics.statistics')}}"><i class="fas fa-fw fa-chart-bar"></i>&nbsp;&nbsp;&nbsp;&nbsp;Statistics</a></li>
+        <li class="aside_dropdown-btn"><a href="javascript:void(0)"><i class="fas fa-fw fa-cog"></i>&nbsp;&nbsp;&nbsp;&nbsp;Settings<i class="aside_list-item-icon-right fas fa-fw fa-chevron-right"></i></a></li>
+        <div class="aside_dropdown-container">
+          <ul class="aside_list-child">
+            <li class="aside_list-item-child"><a href="#language"><i class="fas fa-fw fa-globe"></i>&nbsp;&nbsp;Language</a></li>
+            <li class="aside_list-item-child"><a href="#theme"><i class="fas fa-fw fa-image"></i>&nbsp;&nbsp;Theme</a></li>
+            <li class="aside_list-item-child"><a href="#time"><i class="fas fa-fw fa-clock"></i>&nbsp;&nbsp;Local Time</a></li>
+          </ul>
+        </div>
+      </ul>
+    {% endblock %}
+    </aside>
+    <main class="main">
+    {% block main %}
+    {% endblock %}
+    </main>
+    <footer class="footer">
+    {% block footer %}
+      <p> Copyright &copy; <script>
+        document.write(new Date().getFullYear())
+        </script> Dashboard IoT</p>
+    {% endblock %}
+    </footer>
+  </div>
+
+  <script type="text/javascript" src="{{ url_for('static', filename='base.js') }}"></script>
+
+</body>
+
+</html>

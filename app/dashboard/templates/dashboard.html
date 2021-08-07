@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block header_breadcrumb_date %}
+<div class="header_breadcrumb-date">
+  <form method="get">
+    <input id="header_breadcrumb-date-input" name="date" value="{{ date }}" autocomplete="off" required>
+    <button id="header_breadcrumb-date-submit" type="submit">
+      <i class="fas fa-calendar"></i>
+    </button>
+  </form>
+</div>
+{% endblock %}
+
+{% block main %}
+
+<!-- main overview maybe -->
+<div class="main_cards">
+  <div class="main_card">
+    <div class="main_card-header">
+      <div class="main_card-header-title">Truck Turnaround Time</div>
+      <div class="main_card-header-item-container">
+        <div class="main_card-header-legend">
+          <div class="main_card-header-legend-blue"></div>
+          <div class="main_card-header-legend-text">Current</div>
+          <div class="main_card-header-legend-red" style="margin-left: 5px"></div>
+          <div class="main_card-header-legend-text">Improved</div>
+        </div>
+        <div class="main_card-header-item "><i class="fas fa-chevron-down"></i></div>
+        <div class="main_card-header-item "><i class="far fa-window-maximize"></i></div>
+      </div>
+    </div>
+    <div class="main_card-content">
+      <canvas id="ttt"></canvas>
+    </div>
+  </div>
+  <div class="main_card">
+    <div class="main_card-header">
+      <div class="main_card-header-title">Speed</div>
+      <div class="main_card-header-item-container">
+        <div class="main_card-header-item "><i class="fas fa-chevron-down"></i></div>
+        <div class="main_card-header-item "><i class="far fa-window-maximize"></i></div>
+      </div>
+    </div>
+    <div class="main_card-content">
+      <canvas id="speed"></canvas>
+    </div>
+  </div>
+  <div class="main_card">
+    <div class="main_card-header">
+      <div class="main_card-header-title">Humidity</div>
+      <div class="main_card-header-item-container">
+        <div class="main_card-header-item "><i class="fas fa-chevron-down"></i></div>
+        <div class="main_card-header-item "><i class="far fa-window-maximize"></i></div>
+      </div>
+    </div>
+    <div class="main_card-content">
+      <canvas id="humidity"></canvas>
+    </div>
+  </div>
+  <div class="main_card">
+    <div class="main_card-header">
+      <div class="main_card-header-title">Pressure</div>
+      <div class="main_card-header-item-container">
+        <div class="main_card-header-item "><i class="fas fa-chevron-down"></i></div>
+        <div class="main_card-header-item "><i class="far fa-window-maximize"></i></div>
+      </div>
+    </div>
+    <div class="main_card-content">
+      <canvas id="pressure"></canvas>
+    </div>
+  </div>
+  <div class="main_card-map">
+    <div class="main_card-header">
+      <div class="main_card-header-title">Map Overview</div>
+      <div class="main_card-header-item-container">
+        <div class="main_card-header-item "><i class="fas fa-chevron-down"></i></div>
+        <div class="main_card-header-item "><i class="far fa-window-maximize"></i></div>
+      </div>
+    </div>
+    <div class="main_card-map-content">
+      <div id="map"></div>
+    </div>
+  </div>
+  <div class="main_card-table">
+    <div class="main_card-header">
+      <div class="main_card-header-title">Summary Table</div>
+    </div>
+    <div class="main_card-table-nav">
+      <ul class="main_card-table-nav-list">
+        <li class="main_card-table-nav-list-item active"><a href="#dashboard">Properties</a></li>
+        <li class="main_card-table-nav-list-item"><a href="#iot-devices">Other 1</a></li>
+        <li class="main_card-table-nav-list-item"><a href="#gps-trackers">Other 2</a></li>
+        <li class="main_card-table-nav-list-item"><a href="#trucks">Other 3</a></li>
+      </ul>
+    </div>
+    <div class="main_card-table-content">
+
+      <table class="card-table">
+        <tr>
+          <th>Property</th>
+          <th>Min</th>
+          <th>Max</th>
+          <th>Avg</th>
+        </tr>
+        <tr>
+          <td>Speed</td>
+          <td><span id="speed-min"></span>&nbsp;km/h</td>
+          <td><span id="speed-max"></span>&nbsp;km/h</td>
+          <td><span id="speed-avg"></span>&nbsp;km/h</td>
+        </tr>
+        <tr>
+          <td>Humidity</td>
+          <td><span id="humidity-min"></span>&nbsp;%</td>
+          <td><span id="humidity-max"></span>&nbsp;%</td>
+          <td><span id="humidity-avg"></span>&nbsp;%</td>
+        </tr>
+        <tr>
+          <td>Pressure</td>
+          <td><span id="pressure-min"></span>&nbsp;hPa</td>
+          <td><span id="pressure-max"></span>&nbsp;hPa</td>
+          <td><span id="pressure-avg"></span>&nbsp;hPa</td>
+        </tr>
+        <tr>
+          <td>Current Truck Turnaround Time</td>
+          <td><span id="current-ttt-min"></span>&nbsp;min</td>
+          <td><span id="current-ttt-max"></span>&nbsp;min</td>
+          <td><span id="current-ttt-avg"></span>&nbsp;min</td>
+        </tr>
+        <tr>
+          <td>Improved Truck Turnaround Time</td>
+          <td><span id="improved-ttt-min"></span>&nbsp;min</td>
+          <td><span id="improved-ttt-max"></span>&nbsp;min</td>
+          <td><span id="improved-ttt-avg"></span>&nbsp;min</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var speeds = JSON.parse('{{ speed | tojson | safe }}',
+    function(key, value){
+      if(key === 'speed'){
+      value = value.toFixed(2);
+      }
+      return value;
+    }
+  );
+</script>
+<script type="text/javascript" src="{{ url_for('dashboard.static', filename='speed.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('dashboard.static', filename='humidity.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('dashboard.static', filename='pressure.js') }}"></script>
+<script type="text/javascript">
+  var currentTTTs = JSON.parse('{{ curr_ttt | tojson | safe }}', 
+    function(key, value){
+      if(key === 'y'){
+        value = value.toFixed(2);
+      }
+      return value;
+    }
+  );
+
+  var improvedTTTs = JSON.parse('{{ impr_ttt | tojson | safe }}', 
+    function(key, value){
+      if(key === 'y'){
+        value = value.toFixed(2);
+      }
+      return value;
+    }
+  );
+</script>
+<script type="text/javascript" src="{{ url_for('dashboard.static', filename='truck-turnaround-time.js') }}"></script>
+<script type="text/javascript">
+  var mapData = JSON.parse('{{ map_data | tojson | safe }}');
+</script>
+<script type="text/javascript" src="{{ url_for('dashboard.static', filename='map.js') }}"></script>
+
+{% endblock %}

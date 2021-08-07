@@ -1,0 +1,221 @@
+/* layout for main section */
+
+/* main dashboard cards */
+
+.main_cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 210px 210px 210px 210px 400px auto;
+  grid-template-areas:
+    'card1'
+    'card2'
+    'card3'
+    'card4'
+    'map'
+    'table';
+  grid-gap: 10px;
+  padding: 7.5px;
+}
+
+.main_card {
+  background-color: white;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid #dde0e6;
+}
+
+.main_card:first-child {
+  grid-area: card1;
+}
+
+.main_card:nth-child(2) {
+  grid-area: card2;
+}
+
+.main_card:nth-child(3) {
+  grid-area: card3;
+}
+
+.main_card:nth-child(4) {
+  grid-area: card4;
+}
+
+.main_card-map {
+  grid-area: map;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid #d8dbe0;
+}
+
+.main_card-table {
+  grid-area: table;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid #d8dbe0;
+}
+
+.main_card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 4px 8px;
+  border-bottom: 1px solid #dde0e6;
+}
+
+.main_card-header-title {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.main_card-header-item-container {
+  /* share, export */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  border: none;
+}
+
+.main_card-header-legend {
+  display: inline-block;
+  height: 100%;
+  margin-right: 14px;
+  text-align: center;
+}
+
+.main_card-header-legend-red {
+  display: inline-block;
+  width: 12px;
+  height: 14px;
+  background-color: #E64A19;
+  vertical-align: middle;
+}
+
+.main_card-header-legend-blue {
+  display: inline-block;
+  width: 12px;
+  height: 14px;
+  background-color: #00BCD4;
+  vertical-align: middle;
+}
+
+.main_card-header-legend-text {
+  font-size: 13px;
+  display: inline-block;
+}
+
+.main_card-header-item {
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  font-size: 11px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.main_card-header-item > i {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -35%);
+}
+
+.main_card-header-item:active {
+  color: #2378CD;
+}
+
+@media (hover: hover) {
+  /* only non touch devices */
+  .main_card-header-item:hover {
+    color: #2378CD;
+  }
+}
+
+.main_card-content {
+  width: 100%;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 10px 18px 6px 6px;
+}
+
+.main_card-map-content {
+  width: 100%;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 0;
+}
+
+.main_card-table-content {
+  width: 100%;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 16px 32px;
+  overflow-x: auto;
+}
+
+.main_card-table-nav {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #dde0e6;
+}
+
+.main_card-table-nav-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: left;
+}
+
+.main_card-table-nav-list-item {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.main_card-table-nav-list-item.active {
+  color: #2378cd;
+  box-shadow: inset 0 -3px 0 #2378cd;
+}
+
+.main_card-table-nav-list-item > a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  padding: 4px 8px;
+}
