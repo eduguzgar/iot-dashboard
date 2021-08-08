@@ -63,7 +63,12 @@ pip install -r requirements.txt
 ```
 
 
-## Upgrade
+## Upgrade ⤵️
+
+To upgrade all python packages simply run the upgrade script **within the virtual environment**:
+```
+./scripts/upgrade.sh
+```
 
 
 ## Usage 🚀
@@ -84,5 +89,17 @@ python -m comm_protocol.mt82x
 ```
 
 ### Shutdown application
+```
+./scripts/shutdown.sh
+```
+
 ### Restart application
+```
+./scripts/restart.sh
+```
+
 ### Application status
+```
+./scripts/status.sh
+```
+Be care the application **could have been started without this scripts** (e.g. starting manually from another folder), so the status and shutdown scripts could fail or show wrong results.
