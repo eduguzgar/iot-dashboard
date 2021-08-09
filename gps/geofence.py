@@ -6,15 +6,16 @@ def point_in_polygon(lat, lon, polygon):
     y = lat
 
     inside = False
-    for edge in polygon:
+    for i in range(len(polygon)-1):
         # i vertex
-        xi = edge[1]
-        yi = edge[0]
+        xi = polygon[i][1]
+        yi = polygon[i][0]
 
         # j vertex
-        xj = edge[3]
-        yj = edge[2]
+        xj = polygon[i + 1][1]
+        yj = polygon[i + 1][0]
 
+        # conditions and ecuation of a line
         intersect = ((yi > y) != (yj > y)) and (
             x < (xj - xi) * (y - yi) / (yj - yi) + xi
         )
@@ -24,3 +25,4 @@ def point_in_polygon(lat, lon, polygon):
             inside = not inside
 
     return inside
+    
