@@ -9,4 +9,4 @@ set datestyle = default;
 
 \copy gps_tracker_gps_data (head, mode, imei, ip, port, data_type, satellite_n, timestamp_utc, timestamp_utc_ms, date_local, latitude, longitude, speed, heading, event_id, voltage, sequence_number) from 'gps_tracker_gps_data.csv' delimiter ',' csv header;
 
-\copy gps_geofence_entries (imei, timestamp_utc, latitude, longitude, speed, old_zone, new_zone, mode_change_success, gps_tracker_gps_data_id) from 'gps_geofence_entries.csv' delimiter ',' csv header;
+\copy gps_geofence_entries (imei, timestamp_utc, latitude, longitude, speed, old_zone, new_zone, mode_change_success) from 'gps_geofence_entries.csv' delimiter ',' csv header;
