@@ -1,0 +1,12 @@
+\cd :dir;
+set datestyle = dmy;
+
+\copy data_shipping (creation_date, container, release_truck_plate, acceptance_truck_plate, closing_time_valid_date, release_expiration_date, acceptance_expiration_date, iso_type, release_state, acceptance_state, release_company_name, acceptance_company_name, unloading_berth_request_number, loading_berth_request_number, unloading_vessel_name, loading_vessel_name, load_date,discharge_date, release_estimated_date, release_proposed_date, release_real_date, acceptance_estimated_date, acceptance_proposed_date, acceptance_real_date, release_entry_date, release_exit_date, release_date) from 'data_cosco.csv' delimiter ',' csv header null as 'NULL';
+
+set datestyle = default;
+
+\copy gps_tracker_cell_data (head, mode, imei, ip, port, data_type, timestamp_utc, timestamp_utc_ms, date_local, mnc, cell_id, lac, mcc, pcid, event_id, voltage, sequence_number) from 'gps_tracker_cell_data.csv' delimiter ',' csv header;
+
+\copy gps_tracker_gps_data (head, mode, imei, ip, port, data_type, satellite_n, timestamp_utc, timestamp_utc_ms, date_local, latitude, longitude, speed, heading, event_id, voltage, sequence_number) from 'gps_tracker_gps_data.csv' delimiter ',' csv header;
+
+\copy gps_geofence_entries (imei, timestamp_utc, latitude, longitude, speed, old_zone, new_zone, mode_change_success, gps_tracker_gps_data_id) from 'gps_geofence_entries.csv' delimiter ',' csv header;
