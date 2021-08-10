@@ -13,7 +13,7 @@ Fully integrated architecture platform with a dashboard for **Logistics Monitori
 
 ## Platform architecture
 
-<img src="https://github.com/eduguzgar/iot-dashboard/blob/master/img/platform_architecture.png?raw=true" width="680">
+<img src="https://github.com/eduguzgar/iot-dashboard/blob/master/img/platform_architecture.png?raw=true" width="700">
 
 
 ## Dashboard layout
