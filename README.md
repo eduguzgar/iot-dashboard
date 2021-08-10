@@ -34,7 +34,7 @@ Fully integrated architecture platform with a dashboard for **Logistics Monitori
 - **Linux** operating system.
 - **Python** (version >= 3.8) installed.
 - **pip** installed.
-- **PosgreSQL** server installed, I recommend lastest stable version. You can follow [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-20-04). I also recommend to set up the configration file _"pg_hba.conf"_ and set a IPv4 host entry to listen at "0.0.0.0" address and allow md5 authentication, there are many guides about _"pg_hba.conf"_ out there.
+- **PosgreSQL** server installed, I recommend lastest stable version. You can follow [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-20-04). I also recommend to set up the configuration file _"pg_hba.conf"_ and set a IPv4 host entry to listen at "0.0.0.0" address and allow md5 authentication, there are many guides about _"pg_hba.conf"_ out there.
 - **Port forwarding** for the ports described [here](https://github.com/eduguzgar/iot-dashboard/blob/master/port_forwarding.txt).
 - **pgAdmin 4** (Optional).
 
