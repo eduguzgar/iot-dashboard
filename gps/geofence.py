@@ -6,7 +6,7 @@ def point_in_polygon(lat, lon, polygon):
     y = lat
 
     inside = False
-    for i in range(len(polygon)-1):
+    for i in range(len(polygon) - 1):
         # i vertex
         xi = polygon[i][1]
         yi = polygon[i][0]
