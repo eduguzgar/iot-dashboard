@@ -2,7 +2,7 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-${DIR}/shutdown.sh
+"${DIR}/shutdown.sh"
 sleep 4
 echo ""
-${DIR}/start.sh
+"${DIR}/start.sh"

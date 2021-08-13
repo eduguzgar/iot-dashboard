@@ -10,7 +10,7 @@ NC=$(tput sgr0)
 INFO="[${BLUE}INFO${NC}] - "
 ERROR="[${RED}ERROR${NC}] - "
 
-cd $DIR
+cd "$DIR"
 
 TODAY=$(LANG=en_us_88591;date -u)
 TODAY_YMD=`date -u --date="$TODAY" +'%Y%m%d'`

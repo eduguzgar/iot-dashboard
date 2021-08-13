@@ -27,10 +27,12 @@ fi
 # if venv is active, perform upgrade
 printf "${INFO}PERFORMING PIP UPGRADE, PLEASE CHECK FOR ERRORS\n\n"
 
-pip freeze > ${DIR}/requirements.txt
+cd "$DIR"
+
+pip freeze > requirements.txt
 sleep 4
-sed -i 's/==/>=/' ${DIR}/requirements.txt
+sed -i 's/==/>=/' requirements.txt
 
 pip install -r requirements.txt --upgrade
 sleep 4
-pip freeze > ${DIR}/requirements.txt
+pip freeze > requirements.txt

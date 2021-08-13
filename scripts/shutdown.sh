@@ -2,6 +2,7 @@
 
 # ask for root
 sudo echo "" > /dev/null
+if ! sudo -n true 2>/dev/null; then exit 1; fi
 
 DIR="$( dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )")"
 

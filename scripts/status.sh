@@ -2,8 +2,7 @@
 
 # ask for root
 sudo echo "" > /dev/null
-
-DIR="$( dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )")"
+if ! sudo -n true 2>/dev/null; then exit 1; fi
 
 # set output console colors
 RED=$(tput setaf 9) BLUE=$(tput setaf 14) PURPLE=$(tput setaf 13)
