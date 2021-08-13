@@ -18,6 +18,9 @@ source "${DIR}/.env"
 
 export PGPASSWORD=$DB_PASS
 
+# create data folder before asking for import data
+mkdir "${DIR}/data"
+
 # prompt for importing data tables
 fill_tables=false
 while true
@@ -41,9 +44,6 @@ echo ""
 
 # create required project folders
 printf "${INFO}CREATING PROJECT FOLDERS\n"
-
-# create data folder
-mkdir "${DIR}/data"
 
 # create log folders
 mkdir "${DIR}/app/log"
