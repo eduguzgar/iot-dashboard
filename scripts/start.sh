@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR="$( dirname $( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd ))"
+DIR="$( dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )")"
 
 # set output console colors
 RED=$(tput setaf 9) BLUE=$(tput setaf 14)
