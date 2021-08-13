@@ -19,9 +19,8 @@ source "${DIR}/.env"
 export PGPASSWORD=$DB_PASS
 
 # create data folder before asking for import data
-if [ ! -d "${DIR}/data" ]
-then
-    mkdir "${DIR}/data"  
+if [ ! -d "${DIR}/data" ]; then
+    mkdir "${DIR}/data"
 fi
 
 # prompt for importing data tables
@@ -31,7 +30,6 @@ do
     echo "Do you want to import data tables? [Y/N]"
     echo "(If yes, make sure to put the exports in the data folder with the same name as the schema tables now)"
     read -r -p "" input
-
     case $input in
         [yY][eE][sS]|[yY])
             import_data=true
@@ -73,7 +71,7 @@ psql $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -f "${DIR}/database/tables/tru
 psql $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -f "${DIR}/database/tables/gps_geofence_zones.sql"
 
 # import data tables
-if [ "$import_data" = true ] ; then
+if [ "$import_data" = true ]; then
     psql $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -vdir="${DIR}/data" -f "${DIR}/database/import_data.psql"
 fi
 
