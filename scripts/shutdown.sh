@@ -29,10 +29,7 @@ mt82x_all=($(pgrep -f "python -m comm_protocol.mt82x"))
 declare -a mt82x
 for pid in "${mt82x_all[@]}"; do
 	proc=$(sudo ls -l /proc/$pid/cwd)
-	cwd=$(echo $proc | awk '{print $NF}')
-	if [[ $cwd == \'*\' ]]; then
-		cwd="${cwd#?}"; cwd="${cwd%?}"
-	fi
+	cwd=$(echo $proc | awk -F '-> ' '{print $NF}')
 	if [ "$cwd" = "$DIR" ]; then
 		mt82x+=$pid
 	fi
