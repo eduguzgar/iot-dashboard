@@ -19,17 +19,22 @@ source "${DIR}/.env"
 export PGPASSWORD=$DB_PASS
 
 # create data folder before asking for import data
-mkdir "${DIR}/data"
+if [ ! -d "${DIR}/data" ]
+then
+    mkdir "${DIR}/data"  
+fi
 
 # prompt for importing data tables
-fill_tables=false
+import_data=false
 while true
 do
-    read -r -p "Do you want to import data tables? [Y/N] " input
+    echo "Do you want to import data tables? [Y/N]"
+    echo "(If yes, make sure to put the exports in the data folder with the same name as the schema tables now)"
+    read -r -p "" input
 
     case $input in
         [yY][eE][sS]|[yY])
-            fill_tables=true
+            import_data=true
             break
             ;;
         [nN][oO]|[nN])
@@ -63,14 +68,14 @@ psql $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -f "${DIR}/database/functions.
 # create tables schema
 psql $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -f "${DIR}/database/schema.sql"
 
-# import data tables
-if [ "$fill_tables" = true ] ; then
-    psql $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -vdir="${DIR}/data" -f "${DIR}/database/import_data.psql"
-fi
-
 # load tables
 psql $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -f "${DIR}/database/tables/truck_turnaround_time.sql"
 psql $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -f "${DIR}/database/tables/gps_geofence_zones.sql"
+
+# import data tables
+if [ "$import_data" = true ] ; then
+    psql $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -vdir="${DIR}/data" -f "${DIR}/database/import_data.psql"
+fi
 
 # create indexes
 psql $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -f "${DIR}/database/indexes.sql"
