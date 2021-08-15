@@ -43,7 +43,7 @@ def get_speed(date):
     # convert to list of dicts
     speed = [dict(row) for row in rows]
     # sort dicts by timestamp_utc
-    speed = sorted(speed, key=lambda x: x["timestamp_utc_ms"])
+    speed.sort(key=lambda x: x["timestamp_utc_ms"])
 
     return speed
 
@@ -68,7 +68,7 @@ def get_truck_turnaround_time():
     ttt = [dict(row) for row in rows]
 
     # sort dicts by hour
-    ttt = sorted(ttt, key=lambda x: x["hour"])
+    ttt.sort(key=lambda x: x["hour"])
 
     curr_ttt = [{"t": str(x["hour"]), "y": x["curr_ttt"]} for x in ttt]
     impr_ttt = [{"t": str(x["hour"]), "y": x["impr_ttt"]} for x in ttt]

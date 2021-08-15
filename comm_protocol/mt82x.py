@@ -68,32 +68,33 @@ DB_POOL.init()
 OLD_TIMEZONE = pytz.timezone("UTC")
 NEW_TIMEZONE = pytz.timezone("Europe/Madrid")
 
+# mt82x separators and data types
+SEPARATORS = [";", "+", ","]
+DATA_TYPES = ["R0", "R1", "R12", "R13", "R2", "R3", "RH", "RC"]
+
 def parse_data(data):
     """Parse all received data in a list"""
 
     items = []
-    separators = [";", "+", ","]
     data_len = len(data)
 
     i = 0
     while i < data_len:
         item = ""
-        while i < data_len and data[i] not in separators:
+        while i < data_len and data[i] not in SEPARATORS:
             item += data[i]
             i += 1
         items.append(item)
         i += 1
 
     # get data type
-    data_types = ["R0", "R1", "R12", "R13", "R2", "R3", "RH", "RC"]
-
     try:
         data_type = items[3]
     except IndexError:
         data_type = None
 
     # this means that the message is actually a cmd response
-    if data_type not in data_types:
+    if data_type not in DATA_TYPES:
         data_type = None
 
     return items, data_type
