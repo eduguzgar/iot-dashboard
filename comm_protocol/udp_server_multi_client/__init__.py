@@ -6,8 +6,8 @@ from .udp_server import UDPServer
 class UDPServerMultiClient(UDPServer):
     """Simple UDP Server for handling multiple clients"""
 
-    def __init__(self, host, port, buff_size=1024, handler=None, description=None):
-        super().__init__(host, port, buff_size, description)
+    def __init__(self, host, port, buff_size, handler, description=None):
+        super().__init__(host, port, buff_size, None, description)
         self.handler = handler  # Handler function
         self.socket_lock = threading.Lock()
 

@@ -5,10 +5,11 @@ from datetime import datetime
 class UDPServer:
     """Simple UDP Server"""
 
-    def __init__(self, host, port, buff_size=1024, description=None):
+    def __init__(self, host, port, buff_size, handler, description=None):
         self.host = host  # Host address
         self.port = port  # Host port
         self.buff_size = buff_size  # Buffer size
+        self.handler = handler  # Handler function
         self.description = description  # Socket description
         self.sock = None  # Socket
 
