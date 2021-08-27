@@ -66,10 +66,9 @@ def get_truck_turnaround_time():
 
     # convert to list of dicts
     ttt = [dict(row) for row in rows]
-
     # sort dicts by hour
     ttt.sort(key=lambda x: x["hour"])
-
+    # separate ttt by both current ttt and improved ttt
     curr_ttt = [{"t": str(x["hour"]), "y": x["curr_ttt"]} for x in ttt]
     impr_ttt = [{"t": str(x["hour"]), "y": x["impr_ttt"]} for x in ttt]
 
