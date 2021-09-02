@@ -20,7 +20,6 @@ def create_app():
 
     """ Blueprints """
     with app.app_context():
-
         from .dashboard import dashboard
         app.register_blueprint(dashboard.bp)
 
