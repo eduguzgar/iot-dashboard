@@ -12,10 +12,12 @@ def point_in_polygon(lat, lon, polygon):
         # j vertex
         xj = polygon[i + 1][1]
         yj = polygon[i + 1][0]
+
         # conditions and ecuation of a line
         intersect = ((yi > y) != (yj > y)) and (
             x < (xj - xi) * (y - yi) / (yj - yi) + xi
         )
+        
         # if intersections are an odd number, then the point is inside the polygon
         if intersect is True:
             inside = not inside

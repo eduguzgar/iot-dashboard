@@ -7,7 +7,6 @@ from datetime import datetime
 
 def create_app():
     """Create and configure the app"""
-
     app = Flask(__name__)
 
     # load the instance config, if it exists, when not testing
@@ -20,7 +19,6 @@ def create_app():
         pass
 
     """ Blueprints """
-
     with app.app_context():
 
         from .dashboard import dashboard
@@ -43,7 +41,6 @@ def create_app():
 
 def nocache(view):
     """Decorator for view functions to not use cache"""
-
     @wraps(view)
     def no_cache(*args, **kwargs):
         response = make_response(view(*args, **kwargs))

@@ -1,7 +1,7 @@
 from flask import current_app, g
 from flask.cli import with_appcontext
 
-import psycopg2 as pg2
+import psycopg2
 from psycopg2 import pool
 import psycopg2.extras
 
@@ -62,7 +62,6 @@ def execute_query_write(query, record):
 def get_db():
     if "db_conn" not in g:
         g.db_conn = current_app.config['DB_POOL'].getconn()
-
     if "db_cur" not in g:
         g.db_cur = g.db_conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
@@ -74,6 +73,5 @@ def close_db(exception):
 
     if db_cur is not None:
         db_cur.close()
-
     if db_conn is not None:
         current_app.config['DB_POOL'].putconn(db_conn)

@@ -2,6 +2,7 @@ import psycopg2
 from psycopg2 import pool
 
 class DatabaseConnectionPool:
+    """Database Connection Pool handler class"""
     def __init__(self, host, port, database, user, password, minconn=1, maxconn=50):
         self.host = host
         self.port = port
@@ -33,6 +34,7 @@ class DatabaseConnectionPool:
 
 
 class Database:
+    """Database operation handler class"""
     def __init__(self, conn_pool):
         self.conn_pool = conn_pool
         self.cur = None

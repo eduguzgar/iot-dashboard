@@ -26,7 +26,7 @@ from .database.queries import (
 )
 
 # geofencing
-from gps.geofence import point_in_polygon
+from gps.geofences import point_in_polygon
 
 # geofence polygons
 from gps.constants import (
@@ -74,7 +74,6 @@ DATA_TYPES = ["R0", "R1", "R12", "R13", "R2", "R3", "RH", "RC"]
 
 def parse_data(data):
     """Parse all received data in a list"""
-
     items = []
     data_len = len(data)
 
@@ -112,7 +111,6 @@ def add_data(items, data_type, client_address):
 
     This function should be implemented in any other comm protocol as well.
     """
-
     if data_type == "R2":       # if GSM cell data append None
         items.insert(9, None)
 
@@ -142,9 +140,9 @@ def insert_data(items, data_type, db):
         - gps_tracker_gps_data
         - gps_tracker_cell_data
     """
-
     # gps data
     if data_type == "R0":
+        query = insert_gps_data
         record_to_insert = (
             items[0],   # head
             items[1],   # mode
@@ -164,12 +162,12 @@ def insert_data(items, data_type, db):
             items[15],  # voltage
             items[16],  # sequence number
         )
-        query = insert_gps_data
-
+        # insert and print the id of the inserted record
         rowid = db.execute_query_write(query, record_to_insert)
         print("GPS Data added entry id={}".format(rowid), flush=True)
     # cell data
     elif data_type == "R2" or data_type == "R3":
+        query = insert_cell_data
         record_to_insert = (
             items[0],   # head
             items[1],   # mode
@@ -189,8 +187,7 @@ def insert_data(items, data_type, db):
             items[15],  # voltage
             items[16],  # sequence number
         )
-        query = insert_cell_data
-
+        # insert and print the id of the inserted record
         rowid = db.execute_query_write(query, record_to_insert)
         print("Cell Data added entry id={}".format(rowid), flush=True)
 
@@ -199,6 +196,7 @@ def insert_data(items, data_type, db):
 
 def add_geofence_entry(items, rowid, old_zone, new_zone, mode_change_success, db):
     """Register geofence entry info in gps_geofence_entries table"""
+    query = insert_geofence_entry
     record_to_insert = (
         items[2],               # imei
         items[7],               # timestamp utc
@@ -210,8 +208,8 @@ def add_geofence_entry(items, rowid, old_zone, new_zone, mode_change_success, db
         mode_change_success,    # mode change success
         rowid,                  # gps_tracker_gps_data_id
     )
-    query = insert_geofence_entry
 
+    # insert and print the id of the inserted record
     rowid = db.execute_query_write(query, record_to_insert)
     print("GPS Geofence added entry id={}".format(rowid), flush=True)
 
@@ -230,7 +228,7 @@ def get_old_zone(imei, db):
     return old_zone
 
 
-def check_geofence(items, rowid, sock, client_address, db):
+def check_geofence(items, rowid, client_address, sock, db):
     """Function to check for changes in geofence zones"""
     satellite_n = items[6]
     lat = float(items[10])
@@ -279,20 +277,19 @@ def check_geofence(items, rowid, sock, client_address, db):
             add_geofence_entry(items, rowid, old_zone, ZONE_OUTTER, None, db)
 
 
-def handler(data, sock, client_address):
-    """Handler function to pass the UDP socket"""
-
-    # database
-    db = Database(DB_POOL)
-    db.open()
-
-    # insert data
+def handler(data, client_address, sock):
+    """Handler function to pass to the UDP socket"""
+    # parse data
     items, data_type = parse_data(data)
 
     # if this is true, then we parsed a cmd response, so return
     if data_type is None:
         print(items[0], flush=True)
         return
+    
+    # open database connection from connection pool
+    db = Database(DB_POOL)
+    db.open()
 
     items = add_data(items, data_type, client_address)
     rowid = insert_data(items, data_type, db)
@@ -303,7 +300,7 @@ def handler(data, sock, client_address):
     ###
 
     if data_type == "R0":
-        check_geofence(items, rowid, sock, client_address, db)
+        check_geofence(items, rowid, client_address, sock, db)
 
 
 def main():

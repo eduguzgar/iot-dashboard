@@ -84,7 +84,7 @@ def index():
 
     get_db()  # connect to database and open cursor
 
-    # if the user request 'index' without any date use today
+    # if the user request 'index' without any date use last day with data
     if not date:
         date = get_last_date()
         return redirect(url_for("dashboard.index", date=date))
