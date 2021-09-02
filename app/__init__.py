@@ -18,7 +18,7 @@ def create_app():
     except OSError:
         pass
 
-    """ Blueprints """
+    """Blueprints"""
     with app.app_context():
         from .dashboard import dashboard
         app.register_blueprint(dashboard.bp)
@@ -29,11 +29,12 @@ def create_app():
         from .map_routes import map_routes
         app.register_blueprint(map_routes.bp)
 
-        app.add_url_rule("/", endpoint="dashboard.index")
-        app.add_url_rule("/dashboard", endpoint="dashboard.index")
-        app.add_url_rule("/dashboard/", endpoint="dashboard.index")
+    """Custom url rules"""
+    app.add_url_rule("/", endpoint="dashboard.index")
+    app.add_url_rule("/dashboard", endpoint="dashboard.index")
+    app.add_url_rule("/dashboard/", endpoint="dashboard.index")
 
-    """ This routes """
+    """This routes"""
 
     return app
 
