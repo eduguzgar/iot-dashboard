@@ -14,5 +14,7 @@ htmlcov/
 build/
 *.egg-info/
 
+.vscode/
+
 log/
 nohup.out
