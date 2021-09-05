@@ -13,20 +13,18 @@ Fully integrated architecture platform with a dashboard for **Logistics Monitori
 
 ## Platform architecture
 
-<img src="https://github.com/eduguzgar/iot-dashboard/blob/master/img/platform_architecture.png?raw=true" width="700">
+<img src="https://github.com/eduguzgar/iot-dashboard/blob/master/img/platform_architecture.svg?raw=true" width="710">
 
 
 ## Dashboard layout
 
-<img src="https://github.com/eduguzgar/iot-dashboard/blob/master/img/dashboard.png?raw=true" width="763" />
-
-<img src="https://github.com/eduguzgar/iot-dashboard/blob/master/img/map_1.png?raw=true" width="380" /> <img src="https://github.com/eduguzgar/iot-dashboard/blob/master/img/map_2.png?raw=true" width="380" />
-<img src="https://github.com/eduguzgar/iot-dashboard/blob/master/img/map_3.png?raw=true" width="380" /> <img src="https://github.com/eduguzgar/iot-dashboard/blob/master/img/map_4.png?raw=true" width="380" />
+<img src="https://github.com/eduguzgar/iot-dashboard/blob/master/img/dashboard.png?raw=true" width="838" />
+<img src="https://github.com/eduguzgar/iot-dashboard/blob/master/img/map_4.png?raw=true" width="838" />
 
 
 ## Database schema
 
-<img src="https://github.com/eduguzgar/iot-dashboard/blob/master/img/database_schema.png?raw=true" width="680">
+<img src="https://github.com/eduguzgar/iot-dashboard/blob/master/img/database_schema.svg?raw=true" width="680">
 
 
 ## Pre-requisites 📋
