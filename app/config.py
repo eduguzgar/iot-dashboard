@@ -30,7 +30,6 @@ class Config(object):
     DB_POOL_MAXCONN = os.environ["DB_POOL_MAXCONN"]
 
 
-
 class ProductionConfig(Config):
     DEBUG = False
 
